@@ -128,28 +128,13 @@ the project root.")
      (define-key map [(alt down)] 'textmate-column-down)
      (define-key map [(alt shift up)] 'textmate-column-up-with-select)
      (define-key map [(alt shift down)] 'textmate-column-down-with-select))
-	  ((featurep 'ns)  ;; Emacs.app
-	   (define-key map [(super meta return)] 'textmate-next-line)
-	   (define-key map [(super meta t)] 'textmate-clear-cache)
-	   (define-key map [(super meta \])] 'align)
-	   (define-key map [(super meta \[)] 'indent-according-to-mode)
-	   (define-key map [(super \])]  'textmate-shift-right)
-	   (define-key map [(super \[)] 'textmate-shift-left)
-	   (define-key map [(super /)] 'comment-or-uncomment-region-or-line)
-	   (define-key map [(super t)] 'textmate-goto-file)
-	   (define-key map [(super shift l)] 'textmate-select-line)
-	   (define-key map [(super shift t)] 'textmate-goto-symbol)
-     (define-key map [(meta up)] 'textmate-column-up)
-     (define-key map [(meta down)] 'textmate-column-down)
-     (define-key map [(meta shift up)] 'textmate-column-up-with-select)
-     (define-key map [(meta shift down)] 'textmate-column-down-with-select))
+
 	  (t ;; Any other version
 	   (define-key map [(meta return)] 'textmate-next-line)
 	   (define-key map [(control c)(control t)] 'textmate-clear-cache)
 	   (define-key map [(control c)(control a)] 'align)
 	   (define-key map [(meta \])] 'textmate-shift-right)
 	   (define-key map [(meta \[)] 'textmate-shift-left)
-	   (define-key map [(control c)(control k)] 'comment-or-uncomment-region-or-line)
 	   (define-key map [(meta t)] 'textmate-goto-file)
 	   (define-key map [(meta shift l)] 'textmate-select-line)
 	   (define-key map [(meta shift t)] 'textmate-goto-symbol)
@@ -159,6 +144,23 @@ the project root.")
      (define-key map [(alt shift up)] 'textmate-column-up-with-select)
      (define-key map [(alt shift down)] 'textmate-column-down-with-select)))
 	  map))
+
+	  ;; ((featurep 'ns)  ;; Emacs.app
+	 ;;   (define-key map [(super meta return)] 'textmate-next-line)
+	 ;;   (define-key map [(super meta t)] 'textmate-clear-cache)
+	 ;;   (define-key map [(super meta \])] 'align)
+	 ;;   (define-key map [(super meta \[)] 'indent-according-to-mode)
+	 ;;   (define-key map [(super \])]  'textmate-shift-right)
+	 ;;   (define-key map [(super \[)] 'textmate-shift-left)
+	 ;;   (define-key map [(super /)] 'comment-or-uncomment-region-or-line)
+	 ;;   (define-key map [(super t)] 'textmate-goto-file)
+	 ;;   (define-key map [(super shift l)] 'textmate-select-line)
+	 ;;   (define-key map [(super shift t)] 'textmate-goto-symbol)
+     ;; (define-key map [(meta up)] 'textmate-column-up)
+     ;; (define-key map [(meta down)] 'textmate-column-down)
+     ;; (define-key map [(meta shift up)] 'textmate-column-up-with-select)
+     ;; (define-key map [(meta shift down)] 'textmate-column-down-with-select))
+;; (define-key map [(control c)(control k)] 'comment-or-uncomment-region-or-line)
 
 (defvar *textmate-project-root* nil
   "Used internally to cache the project root.")
@@ -182,6 +184,7 @@ function."
   (apply (symbol-function reading-fn) args)))
 
 ;;; allow-line-as-region-for-function adds an "-or-line" version of
+
 ;;; the given comment function which (un)comments the current line is
 ;;; the mark is not active.  This code comes from Aquamac's osxkeys.el
 ;;; and is licensed under the GPL
