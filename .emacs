@@ -17,6 +17,7 @@
 (require 'zencoding-mode)
 (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
+
 ;; (require 'find-file-in-project)
 
 (setq-default truncate-lines t)
@@ -39,6 +40,7 @@
                     (set-variable 'py-indent-offset 4)
                     (set-variable 'py-smart-indentation nil)
                     (set-variable 'indent-tabs-mode nil) )))
+
 
 
 (defun hl-shell-setup()
