@@ -1,4 +1,4 @@
-(setq buffer-auto-save-file-name nil)
+setq buffer-auto-save-file-name nil)
 (setq make-backup-files nil)
 
 (add-to-list 'load-path "~/Sync")
@@ -17,34 +17,6 @@
 (require 'zencoding-mode)
 (add-hook 'sgml-mode-hook 'zencoding-mode) ;; Auto-start on any markup modes
 
-
-(add-to-list 'load-path "~/Sync/coffee-mode")
-(require 'coffee-mode)
-
-(setq coffee-tab-width 2)
-(setq coffee-js-mode 'js-mode)
-(setq coffee-args-compile '("-o ../" "-c")) ; Send output up one directory
-
-(defun coffee-compiled-file-name (&optional filename)
-  "Returns the name of the JavaScript file compiled from a CoffeeScript file.
-If FILENAME is omitted, the current buffer's file name is used."
-  (let ((filename (or filename (buffer-file-name))))
-    (concat 
-     (expand-file-name "" (file-name-directory filename))
-     (file-name-sans-extension (file-name-nondirectory filename)) 
-     ".js")))
-
-(defun coffee-custom ()
-  "coffee-mode-hook"
-
-  ;; Compile '.coffee' files on every save
-  (and (file-exists-p (buffer-file-name))
-       (file-exists-p (coffee-compiled-file-name))
-       (coffee-cos-mode t))
-)
-
-(add-hook 'coffee-mode-hook
-  '(lambda() (coffee-custom)))
 
 ;; (require 'find-file-in-project)
 
@@ -68,6 +40,7 @@ If FILENAME is omitted, the current buffer's file name is used."
                     (set-variable 'py-indent-offset 4)
                     (set-variable 'py-smart-indentation nil)
                     (set-variable 'indent-tabs-mode nil) )))
+
 
 
 (defun hl-shell-setup()
@@ -122,7 +95,6 @@ If FILENAME is omitted, the current buffer's file name is used."
   ;; If there is more than one, they won't work right.
  '(frame-background-mode (quote dark))
  '(inhibit-startup-screen t)
- '(nxml-child-indent 2)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control))))))
 
 (if (featurep 'ns)
@@ -145,7 +117,7 @@ If FILENAME is omitted, the current buffer's file name is used."
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
-;; (global-set-key (kbd "C-]") 'org-todo)
+(global-set-key (kbd "C-]") 'org-todo)
 (global-font-lock-mode 1)
 
 (defadvice zap-to-char (after my-zap-to-char-advice (arg char) activate)
