@@ -23,16 +23,17 @@
 
 (setq coffee-tab-width 2)
 (setq coffee-js-mode 'js-mode)
-(setq coffee-args-compile '("-o ../" "-c")) ; Send output up one directory
+(setq coffee-args-compile '("-c"))
+;; (setq coffee-args-compile '("-o ." "-c")) ; Send output up one directory
 
-(defun coffee-compiled-file-name (&optional filename)
-  "Returns the name of the JavaScript file compiled from a CoffeeScript file.
-If FILENAME is omitted, the current buffer's file name is used."
-  (let ((filename (or filename (buffer-file-name))))
-    (concat 
-     (expand-file-name "" (file-name-directory filename))
-     (file-name-sans-extension (file-name-nondirectory filename)) 
-     ".js")))
+;; (defun coffee-compiled-file-name (&optional filename)
+;;   "Returns the name of the JavaScript file compiled from a CoffeeScript file.
+;; If FILENAME is omitted, the current buffer's file name is used."
+;;   (let ((filename (or filename (buffer-file-name))))
+;;     (concat 
+;;      (expand-file-name "" (file-name-directory filename))
+;;      (file-name-sans-extension (file-name-nondirectory filename)) 
+;;      ".js")))
 
 (defun coffee-custom ()
   "coffee-mode-hook"
@@ -54,6 +55,17 @@ If FILENAME is omitted, the current buffer's file name is used."
 (load "~/Sync/nxhtml/autostart.el")
 (setq mumamo-background-colors nil) 
 (add-to-list 'auto-mode-alist '("\\.html$" . django-html-mumamo-mode))
+
+;; Mumamo is making emacs 23.3 freak out:
+(when (and (equal emacs-major-version 23)
+           (equal emacs-minor-version 3))
+  (eval-after-load "bytecomp"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-beginning-of-syntax-function))
+  ;; tramp-compat.el clobbers this variable!
+  (eval-after-load "tramp-compat"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-beginning-of-syntax-function)))
 
 (autoload #'espresso-mode "espresso" "Start espresso-mode" t)
 (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
@@ -176,3 +188,5 @@ If FILENAME is omitted, the current buffer's file name is used."
  '(region ((nil (:background "#550022"))))
  '(secondary-selection ((((class color) (min-colors 88) (background light)) (:background "pink" :foreground "black")))))
 )
+
+
